@@ -1,3 +1,5 @@
+import pytest
+
 from models.livro import Livro
 from services.livro_service import LivroService
 
@@ -53,3 +55,8 @@ def test_buscar_por_id_encontra_livro_existente():
 def test_buscar_por_id_retorna_none_quando_nao_existe():
     service = LivroService()
     assert service.buscar_por_id(9999) is None
+
+
+def test_livro_com_ano_publicacao_invalido_gera_erro():
+    with pytest.raises(ValueError):
+        Livro(id=1, titulo="Titulo", autor="Autor", ano_publicacao=0)
