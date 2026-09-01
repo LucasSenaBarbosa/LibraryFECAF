@@ -1,3 +1,5 @@
+"""Massa de dados inicial do catálogo: 10 obras clássicas da literatura brasileira e mundial."""
+
 from typing import List
 
 from models.livro import Livro
