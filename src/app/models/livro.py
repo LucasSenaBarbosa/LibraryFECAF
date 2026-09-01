@@ -16,7 +16,12 @@ class Livro:
     fonte_ampliada: bool = False
     compatibilidade_leitor_tela: bool = False
 
+    def __post_init__(self) -> None:
+        if self.ano_publicacao <= 0:
+            raise ValueError("ano_publicacao deve ser um número positivo.")
+
     def recursos_disponiveis(self) -> List[str]:
+        """Lista os nomes dos recursos de acessibilidade marcados como disponíveis."""
         recursos = {
             "Audiolivro": self.audiolivro,
             "Braille": self.braille,
