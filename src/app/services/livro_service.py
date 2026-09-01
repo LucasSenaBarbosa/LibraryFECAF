@@ -11,9 +11,11 @@ class LivroService:
         self._livros: List[Livro] = livros_iniciais()
 
     def listar_livros(self) -> List[Livro]:
+        """Retorna todos os livros cadastrados no catálogo."""
         return list(self._livros)
 
     def buscar_por_id(self, livro_id: int) -> Optional[Livro]:
+        """Retorna o livro com o id informado, ou None se não existir."""
         return next((livro for livro in self._livros if livro.id == livro_id), None)
 
     def _proximo_id(self) -> int:
