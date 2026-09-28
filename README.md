@@ -25,11 +25,14 @@ Na primeira versão, a aplicação:
 - Exibe as informações básicas de cada livro;
 - Informa quais recursos de acessibilidade estão disponíveis para cada obra;
 - Permite o cadastro de novos livros;
-- Permite informar os recursos de acessibilidade disponíveis em cada livro.
+- Permite informar os recursos de acessibilidade disponíveis em cada livro;
+- Busca livros por título ou autor;
+- Filtra livros por um ou mais recursos de acessibilidade;
+- Permite editar e excluir livros cadastrados.
 
 ## 📖 Informações dos livros
 
-Cada livro possui inicialmente:
+Cada livro possui:
 
 - ID
 - Título
@@ -44,13 +47,19 @@ Cada livro possui inicialmente:
 Essas características poderão ser ampliadas conforme os requisitos do
 projeto.
 
+Os recursos são armazenados como valores booleanos (possui/não possui). Isso
+permite registrar várias opções para a mesma obra, como audiolivro e e-book
+acessível, mas ainda não armazena detalhes de cada formato, como duração do
+áudio ou responsável pela narração. Esses metadados podem ser definidos em
+uma evolução futura.
+
 ## ♿ Acessibilidade dos livros
 
 A acessibilidade é o principal foco do projeto.
 
 O sistema permite identificar quais recursos estão disponíveis em cada
-livro. Dessa forma, uma pessoa poderá futuramente buscar obras que atendam
-às suas necessidades específicas.
+livro. Dessa forma, uma pessoa pode buscar obras que atendam às suas
+necessidades específicas.
 
 Por exemplo, uma pessoa que utiliza audiolivros poderá procurar somente
 livros que possuam uma versão em audiolivro. Outra pessoa que utiliza leitor
@@ -58,8 +67,9 @@ de tela poderá procurar livros disponíveis em formatos compatíveis com essa
 tecnologia.
 
 A proposta não é considerar um livro simplesmente como "acessível" ou "não
-acessível", mas informar quais recursos de acessibilidade ele possui. Veja
-mais detalhes em [docs/acessibilidade.md](docs/acessibilidade.md).
+acessível", mas informar quais recursos de acessibilidade ele possui. O filtro
+combinado retorna somente obras que possuem todos os recursos selecionados.
+Veja mais detalhes em [docs/acessibilidade.md](docs/acessibilidade.md).
 
 ## 🛠️ Tecnologias
 
@@ -141,15 +151,16 @@ Em desenvolvimento — MVP
 - [x] Implementar a listagem dos livros;
 - [x] Implementar o cadastro de novos livros;
 - [x] Implementar testes;
-- [ ] Planejar a busca por recursos de acessibilidade.
+- [x] Implementar busca por título e autor;
+- [x] Implementar filtros combináveis por recursos de acessibilidade;
+- [x] Implementar validação, edição e exclusão de livros.
 
 ## 🔮 Futuras funcionalidades
 
 Após o MVP, o projeto poderá evoluir para incluir:
 
-- Busca por título e autor;
-- Filtros por recursos de acessibilidade;
-- Cadastro de diferentes formatos do mesmo livro;
+- Persistência dos livros entre execuções;
+- Metadados para formatos acessíveis, como duração e narração de audiolivros;
 - Perfis de usuários;
 - Recomendações de livros;
 - Avaliações sobre a acessibilidade das obras;

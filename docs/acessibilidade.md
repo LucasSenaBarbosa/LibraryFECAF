@@ -35,8 +35,19 @@ um desses recursos. Ao listar os livros, o sistema exibe quais recursos estão
 disponíveis para cada obra, para que o leitor identifique rapidamente se ela
 atende ao seu formato de leitura preferido.
 
+O menu permite filtrar por um ou mais recursos ao mesmo tempo. Quando mais de
+um é selecionado, o resultado inclui apenas livros que possuem todos eles. Se
+nenhuma obra atender à combinação, o sistema informa que não encontrou
+resultados. Os mesmos recursos booleanos também podem ser alterados ao editar
+um livro.
+
+O valor booleano informa apenas se o formato ou recurso está disponível. Por
+exemplo, `audiolivro=True` não registra duração, narrador ou endereço para
+acesso ao áudio. Esses detalhes exigiriam metadados próprios para cada formato
+e ficam como possibilidade de evolução do modelo.
+
 ## Evolução futura
 
 Novos recursos de acessibilidade poderão ser adicionados conforme o projeto
-evoluir (por exemplo: LIBRAS, formatos DAISY, entre outros), assim como
-funcionalidades de busca e filtro por recurso específico.
+evoluir (por exemplo: LIBRAS e formatos DAISY, entre outros). Também é possível
+ampliar o modelo para guardar metadados próprios de cada formato.

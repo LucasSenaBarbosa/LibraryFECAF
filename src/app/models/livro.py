@@ -17,8 +17,27 @@ class Livro:
     compatibilidade_leitor_tela: bool = False
 
     def __post_init__(self) -> None:
+        if not isinstance(self.id, int) or isinstance(self.id, bool) or self.id <= 0:
+            raise ValueError("id deve ser um número inteiro positivo.")
+        if not isinstance(self.titulo, str) or not self.titulo.strip():
+            raise ValueError("titulo não pode ficar vazio.")
+        if not isinstance(self.autor, str) or not self.autor.strip():
+            raise ValueError("autor não pode ficar vazio.")
+        if not isinstance(self.ano_publicacao, int) or isinstance(self.ano_publicacao, bool):
+            raise ValueError("ano_publicacao deve ser um número inteiro.")
         if self.ano_publicacao <= 0:
             raise ValueError("ano_publicacao deve ser um número positivo.")
+        recursos = (
+            self.audiolivro,
+            self.braille,
+            self.ebook_acessivel,
+            self.fonte_ampliada,
+            self.compatibilidade_leitor_tela,
+        )
+        if any(not isinstance(recurso, bool) for recurso in recursos):
+            raise ValueError("os recursos de acessibilidade devem ser booleanos.")
+        self.titulo = self.titulo.strip()
+        self.autor = self.autor.strip()
 
     def recursos_disponiveis(self) -> List[str]:
         """Lista os nomes dos recursos de acessibilidade marcados como disponíveis."""
