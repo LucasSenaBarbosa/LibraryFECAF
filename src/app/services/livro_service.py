@@ -50,6 +50,18 @@ class LivroService:
             if all(getattr(livro, recurso) for recurso in recursos_selecionados)
         ]
 
+    def obter_resumo_catalogo(self) -> dict[str, int]:
+        """Retorna a quantidade total de livros e de cada recurso de acessibilidade."""
+        resumo = {recurso: 0 for recurso in self.RECURSOS_ACESSIBILIDADE}
+        resumo["total_livros"] = len(self._livros)
+
+        for livro in self._livros:
+            for recurso in self.RECURSOS_ACESSIBILIDADE:
+                if getattr(livro, recurso):
+                    resumo[recurso] += 1
+
+        return resumo
+
     def _proximo_id(self) -> int:
         if not self._livros:
             return 1

@@ -29,6 +29,7 @@ Na primeira versão, a aplicação:
 - Busca livros por título ou autor;
 - Filtra livros por um ou mais recursos de acessibilidade;
 - Permite editar e excluir livros cadastrados.
+- Exibe um resumo do catálogo com a quantidade de livros por recurso de acessibilidade.
 
 ## 📖 Informações dos livros
 

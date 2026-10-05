@@ -19,7 +19,8 @@ def exibir_menu() -> None:
     print("4. Buscar por acessibilidade")
     print("5. Editar livro")
     print("6. Excluir livro")
-    print("7. Sair")
+    print("7. Resumo do catálogo")
+    print("8. Sair")
 
 
 def ler_texto(pergunta: str, valor_atual: str = "") -> str:
@@ -86,6 +87,23 @@ def listar_livros(service: LivroService) -> None:
     livros = service.listar_livros()
     print(f"\nTotal de livros: {len(livros)}")
     exibir_resultados(livros)
+
+
+def exibir_resumo_catalogo(service: LivroService) -> None:
+    resumo = service.obter_resumo_catalogo()
+    nomes = {
+        "audiolivro": "Audiolivro",
+        "braille": "Braille",
+        "ebook_acessivel": "E-book acessível",
+        "fonte_ampliada": "Fonte ampliada",
+        "compatibilidade_leitor_tela": "Compatibilidade com leitor de tela",
+    }
+
+    print(f"\n📊 Resumo do catálogo")
+    print(f"Total de livros: {resumo['total_livros']}")
+    print("\nRecursos de acessibilidade:")
+    for recurso, nome in nomes.items():
+        print(f"- {nome}: {resumo[recurso]} livro(s)")
 
 
 def cadastrar_livro(service: LivroService) -> None:
@@ -192,6 +210,8 @@ def main() -> None:
         elif opcao == "6":
             excluir_livro(service)
         elif opcao == "7":
+            exibir_resumo_catalogo(service)
+        elif opcao == "8":
             print("Até logo!")
             break
         else:

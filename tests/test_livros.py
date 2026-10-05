@@ -83,6 +83,19 @@ def test_filtro_sem_resultados_retorna_lista_vazia():
     ) == []
 
 
+def test_resumo_catalogo_conta_livros_e_recursos():
+    service = LivroService()
+
+    resumo = service.obter_resumo_catalogo()
+
+    assert resumo["total_livros"] == 10
+    assert resumo["audiolivro"] == 6
+    assert resumo["braille"] == 4
+    assert resumo["ebook_acessivel"] == 5
+    assert resumo["fonte_ampliada"] == 4
+    assert resumo["compatibilidade_leitor_tela"] == 5
+
+
 def test_busca_vazia_e_recurso_desconhecido_sao_rejeitados():
     service = LivroService()
 
