@@ -151,3 +151,16 @@ def test_livro_rejeita_id_ou_recurso_com_tipo_invalido(campo, valor):
 def test_livro_com_ano_publicacao_invalido_gera_erro():
     with pytest.raises(ValueError):
         Livro(id=1, titulo="Titulo", autor="Autor", ano_publicacao=0)
+
+
+@pytest.mark.parametrize("termo", ["conceicao", "CONCEIÇÃO", "  Conceição  "])
+def test_busca_encontra_autor_com_ou_sem_acentos(termo):
+    service = LivroService()
+    livro = service.cadastrar_livro("Águas do amanhã", "Conceição", 2020)
+    assert livro in service.buscar_por_titulo_ou_autor(termo)
+
+
+def test_busca_encontra_titulo_sem_acentos():
+    service = LivroService()
+    livro = service.cadastrar_livro("Águas do amanhã", "Autora", 2020)
+    assert service.buscar_por_titulo_ou_autor("aguas do amanha") == [livro]

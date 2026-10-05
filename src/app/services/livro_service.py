@@ -1,7 +1,17 @@
 from typing import List, Optional
+import unicodedata
 
 from data.livros import livros_iniciais
 from models.livro import Livro
+
+
+def _normalizar_busca(texto: str) -> str:
+    """Ignora caixa e acentos, inclusive em textos Unicode decompostos."""
+    return "".join(
+        caractere
+        for caractere in unicodedata.normalize("NFD", texto.casefold())
+        if not unicodedata.combining(caractere)
+    )
 
 
 class LivroService:
@@ -27,15 +37,15 @@ class LivroService:
         return next((livro for livro in self._livros if livro.id == livro_id), None)
 
     def buscar_por_titulo_ou_autor(self, termo: str) -> List[Livro]:
-        """Busca livros por trecho do título ou do autor, sem diferenciar caixa."""
-        termo_normalizado = termo.strip().casefold()
+        """Busca livros por trecho do título ou do autor, sem diferenciar caixa ou acentos."""
+        termo_normalizado = _normalizar_busca(termo.strip())
         if not termo_normalizado:
             raise ValueError("O termo de busca não pode ficar vazio.")
         return [
             livro
             for livro in self._livros
-            if termo_normalizado in livro.titulo.casefold()
-            or termo_normalizado in livro.autor.casefold()
+            if termo_normalizado in _normalizar_busca(livro.titulo)
+            or termo_normalizado in _normalizar_busca(livro.autor)
         ]
 
     def filtrar_por_acessibilidade(self, recursos: List[str]) -> List[Livro]:
